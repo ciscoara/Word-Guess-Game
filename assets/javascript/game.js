@@ -5,23 +5,26 @@ var wins = 0;
 var losses = 0;
 var guessLeft = 9;
 var guessedLetters = [];
+var winningLetters = [];
 
 
 
 var reset = function () {
     guessLeft = 9;
-    guessLeft = 0;
+    load ();
 }
 
 var load = function () {
 document.getElementById("wins").innerHTML = wins;
 document.getElementById("losses").innerHTML = losses;
 document.getElementById("guessesLeft").innerHTML = guessLeft;
+document.getElementById("guessedLetters").innerHTML = guessedLetters;
+document.getElementById("winning").innerHTML = winningLetters;
 };
 
 load ();
 
-//alert("Ready to play?");
+alert("Ready to play?");
 document.onkeyup = function (event) {
     var playerChoice = event.key.toUpperCase(); //input key from user
     guessedLetters.push(playerChoice);
@@ -34,15 +37,21 @@ document.onkeyup = function (event) {
     
     if (playerChoice === computerChoice ){
         wins++;
+        guessedLetters = [];
+        winningLetters = (playerChoice == computerChoice);
         guessLeft = 9;
-    }
 
+    }
     else {
         guessLeft--;
-        losses++;
-
     }
-    
+
+    if (guessLeft === 0) {
+        losses++;
+        guessLeft = 0;
+        guessedLetters = [];
+        reset();
+      }
 
 
 }
