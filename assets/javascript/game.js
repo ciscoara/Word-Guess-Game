@@ -38,7 +38,7 @@ document.onkeyup = function (event) {
     if (playerChoice === computerChoice ){
         wins++;
         guessedLetters = [];
-        winningLetters = (playerChoice == computerChoice);
+        winningLetters = (computerChoice);
         guessLeft = 9;
 
     }
